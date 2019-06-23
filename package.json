@@ -1,0 +1,16 @@
+{
+  "name": "ws-room-system",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node -r esm index.js"
+  },
+  "dependencies": {
+    "esm": "^3.2.25",
+    "uuid": "^3.3.2",
+    "ws": "^7.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  }
+}

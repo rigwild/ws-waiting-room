@@ -1,0 +1,27 @@
+export const room = {
+  LIST_ROOMS: 'LIST_ROOMS',
+
+  CREATE_ROOM: 'CREATE_ROOM',
+  ROOM_CREATED: 'ROOM_CREATED',
+
+  EXIT_ROOM: 'EXIT_ROOM',
+  ROOM_EXITED: 'ROOM_EXITED',
+
+  JOIN_ROOM: 'JOIN_ROOM',
+  ROOM_JOINED: 'ROOM_JOINED',
+
+  ROOM_READY: 'ROOM_READY',
+
+  ROOM_ERROR: 'ROOM_ERROR'
+}
+
+export const ws = {
+  WS_ERROR: 'WS_ERROR',
+  WS_MSG: 'WS_MSG',
+  WS_MSG_JSON: 'WS_MSG_JSON'
+}
+
+export default {
+  room,
+  ws
+}
