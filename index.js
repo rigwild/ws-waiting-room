@@ -1,4 +1,5 @@
-import createWsServer from './lib'
+import wsRoom from './lib'
+
 
 console.log('Starting the WebSocket server...')
-createWsServer({ host: 'localhost', port: 1337, path: '/ws' })
+wsRoom.startServer({ host: 'localhost', port: 1337, path: '/ws' })

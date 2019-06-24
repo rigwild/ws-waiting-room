@@ -1,5 +1,6 @@
 {
-  "name": "ws-room-system",
+  "name": "ws-waiting-room",
+  "description": "Easily implement a waiting rooms system using WebSockets 👨‍👩‍👧‍👦 Useful for multiplayer games or instant group chat messaging! 👨🏼‍🔧",
   "version": "0.1.0",
   "private": true,
   "scripts": {
