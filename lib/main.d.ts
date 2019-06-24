@@ -1,27 +1,27 @@
 // @ts-check
-import { ServerOptions } from 'ws'
+import WebSocket from 'ws'
 import { EventEmitter } from 'events'
 
 declare interface RoomClient {
   /** Client ID */
-  id: String
+  id: string
 
   /** Client's name */
-  name: String
+  name: string
 
   /** WebSocket client object */
-  wsClient: WebSocket
+  wsClient: any
 }
 
 declare interface Room {
   /** Room ID */
-  id: String
+  id: string
 
   /** Room's name */
-  name: String
+  name: string
 
   /** Room's available places */
-  size: Number
+  size: number
 
   /** Room's clients */
   clients: RoomClient[]
@@ -42,87 +42,95 @@ declare interface WsWaitingRoomEventEmitter extends EventEmitter {
 declare interface RoomHandler {
   /**
   * Check a room exists
-  * @param {String} roomId Room id
+  * @param {string} roomId Room id
   * @returns {void}
   * @throws Could not find the room
   */
-  checkRoomExist(roomId: String): void
+  checkRoomExist(roomId: string): void
 
   /**
    * Get the list of available rooms
    * @returns {Object} Available rooms (Deep copy without clients)
    */
-  getRooms(roomId: String): Object
+  getRooms(roomId: string): Object
 
   /**
    * Get a room
-   * @param {String} roomId Room id to join
+   * @param {string} roomId Room id to join
    * @returns {Room} Selected room data
    */
-  getARoom(roomId: String): Room
+  getARoom(roomId: string): Room
 
   /**
    * Get the amount of places left for a room
-   * @param {String} roomId Room id to join
-   * @returns {Number} Remaining places
+   * @param {string} roomId Room id to join
+   * @returns {number} Remaining places
    */
-  getRoomRemainingSize(roomId: String): Number
+  getRoomRemainingSize(roomId: string): number
 
   /**
    * Get a room clients
-   * @param {String} roomId Room id
+   * @param {string} roomId Room id
    * @returns {RoomClient[]} Room clients
    */
-  getRoomClients(roomId: String): RoomClient[]
+  getRoomClients(roomId: string): RoomClient[]
 
   /**
    * Get a room WebSocket clients
-   * @param {String} roomId Room id
+   * @param {string} roomId Room id
    * @returns {Object[]} Room WebSocket clients
    */
-  getRoomWsClients(roomId: String): Object[]
+  getRoomWsClients(roomId: string): Object[]
 
   /**
    * Create a new room
-   * @param {Number} roomSize Room size (< 0)
-   * @param {String} [roomName='No name'] Room name
-   * @returns {String} Id of the newly created room
+   * @param {number} roomSize Room size (< 0)
+   * @param {string} [roomName='No name'] Room name
+   * @returns {string} Id of the newly created room
    * @throws Can not create a room with an invalid size
    */
-  newRoom(roomSize: Number, roomName: String): String
+  newRoom(roomSize: number, roomName: string): string
 
   /**
    * Join a room
-   * @param {String} roomId Room id to join
-   * @param {String} clientId Client uuid
+   * @param {string} roomId Room id to join
+   * @param {string} clientId Client uuid
    * @param {WebSocket} wsClient WebSocket client to add to the room
-   * @param {String} clientName Client pseudo or name
+   * @param {string} clientName Client pseudo or name
    * @returns {void}
    * @throws The selected room is full
    */
-  joinRoom(roomId: String, clientId: String, wsClient: WebSocket, clientName: String): void
+  joinRoom(roomId: string, clientId: string, wsClient: WebSocket, clientName: string): void
 
   /**
    * Exit a room
-   * @param {String} roomId Room id to exit
-   * @param {String} clientId Client uuid
+   * @param {string} roomId Room id to exit
+   * @param {string} clientId Client uuid
    * @returns {void}
    */
-  exitRoom(roomId: String, clientId: String): void
+  exitRoom(roomId: string, clientId: string): void
 
   /**
    * Send a message to all clients of a room
-   * @param {String} roomId Room's id
-   * @param {String} msgId Message ID
+   * @param {string} roomId Room's id
+   * @param {string} msgId Message ID
    * @param {Object} msg The actual message
    * @returns {void}
    */
-  roomBroadcast(roomId: String, msgId: String, msg: Object): void
+  roomBroadcast(roomId: string, msgId: string, msg: Object): void
+}
+
+declare interface WsWaitingRoomClient extends WebSocket {
+  /** Unique client identifier */
+  uuid: string
+
+  /** The room ID the client is currently in */
+  roomId?: string
 }
 
 declare interface WsWaitingRoom {
   /** Start the server */
-  startServer(wsOptions: ServerOptions, logger: import('./logger').CustomLogger): WebSocket.Server
+  startServer(wsOptions: WebSocket.ServerOptions, logger?: import('./logger').CustomLogger): WebSocket.Server
 
   /** List of messages ID */
   msgId: { room: Object, ws: Object }
