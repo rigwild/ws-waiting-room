@@ -3,6 +3,11 @@
   "description": "Easily implement a waiting rooms system using WebSockets 👨‍👩‍👧‍👦 Useful for multiplayer games or instant group chat messaging! 👨🏼‍🔧",
   "version": "0.1.0",
   "private": true,
+  "types": "./lib/main.d.ts",
+  "directories": {
+    "lib": "./lib"
+  },
+  "author": "rigwild <contact@asauvage.fr> (https://github.com/rigwild)",
   "scripts": {
     "start": "node -r esm index.js"
   },
